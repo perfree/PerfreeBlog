@@ -2,18 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>PerfreeBlog</artifactId>
-        <groupId>com.perfree</groupId>
-        <version>1.0.0</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>perfree-plugins</artifactId>
-    <packaging>pom</packaging>
+    <parent>
+        <groupId>com.perfree</groupId>
+        <artifactId>PerfreeBlog</artifactId>
+        <version>${revision}</version>
+    </parent>
     <modules>
         <module>perfree-plugins-exam</module>
-        <module>perfree-access-logs</module>
     </modules>
 
+    <artifactId>perfree-plugins</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>pom</packaging>
+    <description>插件包,PerfreeBlog插件</description>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.perfree</groupId>
+                <artifactId>perfree-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

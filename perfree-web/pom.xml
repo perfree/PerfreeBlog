@@ -2,113 +2,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>PerfreeBlog</artifactId>
-        <groupId>com.perfree</groupId>
-        <version>1.0.0</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>3.1.2</version>
+    <parent>
+        <groupId>com.perfree</groupId>
+        <artifactId>PerfreeBlog</artifactId>
+        <version>${revision}</version>
+    </parent>
 
-    <groupId>com.perfree</groupId>
     <artifactId>perfree-web</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <description>web包,PerfreeBlog界面</description>
 
+   <dependencies>
+       <dependency>
+           <groupId>com.perfree</groupId>
+           <artifactId>perfree-core</artifactId>
+           <version>${revision}</version>
+       </dependency>
+   </dependencies>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.perfree</groupId>
-            <artifactId>perfree-core</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-              <!--  <excludes>
-                    <exclude>static/**</exclude>
-                    <exclude>Perfree.sql</exclude>
-                    <exclude>Perfree-sqlite.sql</exclude>
-                    <exclude>update.sql</exclude>
-                    <exclude>update-sqlite.sql</exclude>
-                </excludes>-->
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <finalName>perfree-web</finalName>
+        <!-- 设置构建的 jar 包名 -->
+        <finalName>${project.artifactId}</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
+            <!-- 打包 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.5.12</version>
-            </plugin>
-
-            <!--assembly插件-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/resources/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
+                <version>${spring.boot.version}</version>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>repackage</goal> <!-- 将引入的 jar 打入其中 -->
                         </goals>
                     </execution>
                 </executions>
-                <version>3.3.0</version>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <useDefaultDelimiters>true</useDefaultDelimiters>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                </configuration>
-                <version>2.4.3</version>
-            </plugin>
-            <!--<plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.13</version>
-                <configuration>
-                    <imageName>perfree/perfree</imageName>
-                    <repository>perfree/perfree</repository>
-                    <dockerfile>Dockerfile</dockerfile>
-                    <contextDirectory>${project.basedir}</contextDirectory>
-                    <buildArgs>
-                        <PACKAGE_FILE>target/${project.build.finalName}-${version}.tar.gz</PACKAGE_FILE>
-                    </buildArgs>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.${version}-tar.gz</include>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>-->
         </plugins>
     </build>
 </project>

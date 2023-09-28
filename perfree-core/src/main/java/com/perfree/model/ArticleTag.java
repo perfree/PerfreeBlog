@@ -1,26 +1,35 @@
 package com.perfree.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serial;
+import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * p_article_tag table
- * @author Perfree
+ * <p>
+ * 
+ * </p>
+ *
+ * @author perfree
+ * @since 2023-09-27
  */
-public class ArticleTag {
-    private Long articleId;
-    private Long tagId;
+@Getter
+@Setter
+@TableName("p_article_tag")
+public class ArticleTag implements Serializable {
 
-    public Long getArticleId() {
-        return articleId;
-    }
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
-    }
+    /**
+     * 文章id
+     */
+    private Integer articleId;
 
-    public Long getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(Long tagId) {
-        this.tagId = tagId;
-    }
+    /**
+     * 标签id
+     */
+    private Integer tagId;
 }

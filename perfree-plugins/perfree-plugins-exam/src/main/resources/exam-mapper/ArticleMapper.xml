@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.exam.mapper.HelloWorldMapper" >
-    <!-- 插件示例: Mapper.xml  查询所有文章 -->
-    <select id="testQueryArticle" resultType="com.exam.model.Article">
-        select * from `p_article`
-    </select>
-</mapper>

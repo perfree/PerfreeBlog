@@ -3,8 +3,9 @@ package com.perfree.plugin.annotation;
 import java.lang.annotation.*;
 
 /**
- * 定义拦截器注解，用于插件
  * @author Perfree
+ * @description 定义拦截器注解，用于插件
+ * @date 15:34 2023/9/28
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

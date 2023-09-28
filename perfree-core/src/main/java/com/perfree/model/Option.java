@@ -1,48 +1,43 @@
 package com.perfree.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.io.Serial;
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * option table
- * @author Perfree
+ * <p>
+ * 
+ * </p>
+ *
+ * @author perfree
+ * @since 2023-09-27
  */
-@ApiModel(value="Option-配置项数据",description="配置项数据")
+@Getter
+@Setter
+@TableName("p_option")
 public class Option implements Serializable {
-    private static final long serialVersionUID = 7817277417501762377L;
 
-    @ApiModelProperty(value="配置项ID",name="id")
-    private Long id;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value="配置key",name="key")
+    /**
+     * 主键
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * key
+     */
     private String key;
 
-    @ApiModelProperty(value="配置value",name="value")
+    /**
+     * value
+     */
     private String value;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 }

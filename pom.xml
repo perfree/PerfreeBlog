@@ -3,332 +3,170 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <modules>
-        <module>perfree-core</module>
-        <module>perfree-plugins</module>
-        <module>perfree-web</module>
-    </modules>
-
-    <parent>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <groupId>org.springframework.boot</groupId>
-        <version>2.5.14</version>
-    </parent>
 
     <groupId>com.perfree</groupId>
     <artifactId>PerfreeBlog</artifactId>
-    <version>1.0.0</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
+    <name>${project.artifactId}</name>
+    <description>PerfreeBlog</description>
+    <url>https://github.com/perfree/PerfreeBlog</url>
+    <modules>
+        <module>perfree-core</module>
+        <module>perfree-web</module>
+        <module>perfree-plugins</module>
+    </modules>
+
     <properties>
-        <java.version>1.8</java.version>
-        <commons.lang3.version>3.9</commons.lang3.version>
-        <spring.version>2.5.14</spring.version>
-        <shiro.spring.version>1.9.1</shiro.spring.version>
-        <sqlite.version>3.25.2</sqlite.version>
+        <revision>4.0.0</revision>
+        <!-- Maven 相关 -->
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <spring.boot.version>3.1.4</spring.boot.version>
+        <druid.version>1.2.18</druid.version>
+        <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
+        <lombok.version>1.18.26</lombok.version>
+        <hutool.version>5.8.20</hutool.version>
+        <velocity.version>2.3</velocity.version>
+        <knife4j.version>4.3.0</knife4j.version>
+        <jwt.version>0.11.5</jwt.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
     </properties>
 
-   <dependencyManagement>
-       <dependencies>
-           <!-- Springboot-web -->
-           <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-web</artifactId>
-               <version>${spring.version}</version>
-               <exclusions>
-                   <exclusion>
-                       <groupId>org.apache.logging.log4j</groupId>
-                       <artifactId>log4j-to-slf4j</artifactId>
-                   </exclusion>
-               </exclusions>
-           </dependency>
-           <dependency>
-               <groupId>org.javassist</groupId>
-               <artifactId>javassist</artifactId>
-               <version>3.28.0-GA</version>
-           </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-           <dependency>
-               <groupId>com.rometools</groupId>
-               <artifactId>rome</artifactId>
-               <version>1.16.0</version>
-           </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
 
-           <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-websocket</artifactId>
-               <version>${spring.version}</version>
-           </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
 
-           <dependency>
-               <groupId>org.xerial</groupId>
-               <artifactId>sqlite-jdbc</artifactId>
-               <version>${sqlite.version}</version>
-           </dependency>
-           <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-validation</artifactId>
-               <version>${spring.version}</version>
-           </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
 
-           <dependency>
-               <groupId>com.auth0</groupId>
-               <artifactId>java-jwt</artifactId>
-               <version>3.4.1</version>
-           </dependency>
-
-           <!-- spring-boot-devtools -->
-           <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-devtools</artifactId>
-               <scope>runtime</scope>
-               <optional>true</optional>
-               <version>${spring.version}</version>
-           </dependency>
-
-           <!-- commons-lang3 -->
-           <dependency>
-               <groupId>org.apache.commons</groupId>
-               <artifactId>commons-lang3</artifactId>
-               <version>${commons.lang3.version}</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-aop</artifactId>
-               <version>${spring.version}</version>
-           </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
 
 
-           <dependency>
-               <groupId>cn.hutool</groupId>
-               <artifactId>hutool-all</artifactId>
-               <version>5.4.7</version>
-           </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
 
-           <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-test</artifactId>
-               <scope>test</scope>
-               <exclusions>
-                   <exclusion>
-                       <groupId>org.junit.vintage</groupId>
-                       <artifactId>junit-vintage-engine</artifactId>
-                   </exclusion>
-               </exclusions>
-               <version>${spring.version}</version>
-           </dependency>
-
-
-           <dependency>
-               <groupId>com.jfinal</groupId>
-               <artifactId>enjoy</artifactId>
-               <version>4.9.02</version>
-           </dependency>
-
-           <!-- shiro-spring -->
-           <dependency>
-               <groupId>org.apache.shiro</groupId>
-               <artifactId>shiro-spring-boot-web-starter</artifactId>
-               <version>${shiro.spring.version}</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.mybatis.spring.boot</groupId>
-               <artifactId>mybatis-spring-boot-starter</artifactId>
-               <version>2.2.2</version>
-           </dependency>
-
-           <dependency>
-               <groupId>com.github.dfabulich</groupId>
-               <artifactId>sitemapgen4j</artifactId>
-               <version>1.1.2</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.jsoup</groupId>
-               <artifactId>jsoup</artifactId>
-               <version>1.14.3</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.pf4j</groupId>
-               <artifactId>pf4j</artifactId>
-               <version>3.6.0</version>
-           </dependency>
-
-
-           <!-- 分页插件 -->
-           <dependency>
-               <groupId>com.github.pagehelper</groupId>
-               <artifactId>pagehelper-spring-boot-starter</artifactId>
-               <version>1.4.3</version>
-           </dependency>
-           <dependency>
-               <groupId>mysql</groupId>
-               <artifactId>mysql-connector-java</artifactId>
-               <version>5.1.49</version>
-           </dependency>
-
-
-           <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-jdbc</artifactId>
-               <version>2.3.0.RELEASE</version>
-           </dependency>
-
-
-           <dependency>
-               <groupId>com.alibaba</groupId>
-               <artifactId>druid-spring-boot-starter</artifactId>
-               <version>1.1.10</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-starter-mail</artifactId>
-               <version>${spring.version}</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.commonmark</groupId>
-               <artifactId>commonmark-ext-gfm-tables</artifactId>
-               <version>0.18.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>com.atlassian.commonmark</groupId>
-               <artifactId>commonmark-ext-gfm-strikethrough</artifactId>
-               <version>0.17.0</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.commonmark</groupId>
-               <artifactId>commonmark-ext-task-list-items</artifactId>
-               <version>0.18.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.commonmark</groupId>
-               <artifactId>commonmark-ext-yaml-front-matter</artifactId>
-               <version>0.18.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.commonmark</groupId>
-               <artifactId>commonmark-ext-heading-anchor</artifactId>
-               <version>0.18.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.commonmark</groupId>
-               <artifactId>commonmark-ext-ins</artifactId>
-               <version>0.18.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.commonmark</groupId>
-               <artifactId>commonmark-ext-autolink</artifactId>
-               <version>0.18.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.commonmark</groupId>
-               <artifactId>commonmark-ext-image-attributes</artifactId>
-               <version>0.18.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>org.commonmark</groupId>
-               <artifactId>commonmark</artifactId>
-               <version>0.18.1</version>
-           </dependency>
-
-           <dependency>
-               <groupId>net.sf.ehcache</groupId>
-               <artifactId>ehcache</artifactId>
-               <version>2.10.6</version>
-           </dependency>
-
-           <dependency>
-               <groupId>io.springfox</groupId>
-               <artifactId>springfox-swagger2</artifactId>
-               <version>2.9.2</version>
-               <exclusions>
-                   <exclusion>
-                       <groupId>io.swagger</groupId>
-                       <artifactId>swagger-annotations</artifactId>
-                   </exclusion>
-                   <exclusion>
-                       <groupId>io.swagger</groupId>
-                       <artifactId>swagger-models</artifactId>
-                   </exclusion>
-               </exclusions>
-           </dependency>
-
-           <dependency>
-               <groupId>io.swagger</groupId>
-               <artifactId>swagger-annotations</artifactId>
-               <version>1.5.21</version>
-           </dependency>
-           <dependency>
-               <groupId>io.swagger</groupId>
-               <artifactId>swagger-models</artifactId>
-               <version>1.5.21</version>
-           </dependency>
-
-           <dependency>
-               <groupId>com.github.xiaoymin</groupId>
-               <artifactId>swagger-bootstrap-ui</artifactId>
-               <version>1.9.6</version>
-           </dependency>
-
-           <dependency>
-               <groupId>com.aliyun.oss</groupId>
-               <artifactId>aliyun-sdk-oss</artifactId>
-               <version>3.14.0</version>
-               <exclusions>
-                   <exclusion>
-                       <groupId>org.slf4j</groupId>
-                       <artifactId>slf4j-api</artifactId>
-                   </exclusion>
-               </exclusions>
-           </dependency>
-
-           <dependency>
-               <groupId>com.qiniu</groupId>
-               <artifactId>qiniu-java-sdk</artifactId>
-               <version>7.9.3</version>
-           </dependency>
-
-           <dependency>
-               <groupId>com.qcloud</groupId>
-               <artifactId>cos_api</artifactId>
-               <version>5.6.99</version>
-               <exclusions>
-                   <exclusion>
-                       <groupId>org.slf4j</groupId>
-                       <artifactId>slf4j-api</artifactId>
-                   </exclusion>
-               </exclusions>
-           </dependency>
-
-       </dependencies>
-   </dependencyManagement>
+            <!-- jwt相关 -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-jdk8</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArgument>-parameters</compilerArgument>
-                </configuration>
-                <version>3.10.1</version>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.springframework.boot</groupId>
+                                <artifactId>spring-boot-configuration-processor</artifactId>
+                                <version>${spring.boot.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
+
+
+    <!-- 使用 aliyun 的 Maven 源，提升下载速度 -->
+    <repositories>
+        <repository>
+            <id>aliyunmaven</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
 </project>

@@ -1,92 +1,64 @@
 package com.perfree.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 友链实体
- * @author Perfree
+ * <p>
+ * 
+ * </p>
+ *
+ * @author perfree
+ * @since 2023-09-27
  */
-@ApiModel(value="Link-友链数据",description="友链数据")
+@Getter
+@Setter
+@TableName("p_link")
 public class Link implements Serializable {
-    private static final long serialVersionUID = 7817276417501762472L;
-    @ApiModelProperty(value="友链ID",name="id")
-    private Long id;
 
-    @ApiModelProperty(value="友链名",name="name")
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 主键
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 网站名
+     */
     private String name;
 
-    @ApiModelProperty(value="友链logo",name="logo")
+    /**
+     * 网站logo
+     */
     private String logo;
 
-    @ApiModelProperty(value="友链描述",name="desc")
+    /**
+     * 网站描述
+     */
     private String desc;
 
-    @ApiModelProperty(value="友链地址",name="address")
+    /**
+     * 网站地址
+     */
     private String address;
 
-    @ApiModelProperty(value="创建时间",name="createTime")
-    private Date createTime;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
 
-    @ApiModelProperty(value="更新时间",name="updateTime")
-    private Date updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 }

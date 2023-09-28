@@ -1,35 +1,44 @@
 package com.perfree.plugin;
 
 /**
- * @description 插件事件
  * @author Perfree
- * @date 2021/11/9 14:25
+ * @description 插件事件接口,所有的插件想要监听生命周期,需实现该接口
+ * @date 15:35 2023/9/28
  */
 public interface BasePluginEvent {
+
     /**
-     * @description 插件启动时加载
-     * @author Perfree
+     * 插件启动时加载
+     * @author perfree
+     * @date 2023-09-27 16:09:05
      */
     void onStart();
 
     /**
-     * @description 插件停止时加载
-     * @author Perfree
+     * 插件停止时加载
+     * @author perfree
+     * @date 2023-09-27 16:09:05
      */
     void onStop();
+
     /**
-     * @description 插件更新时加载
-     * @author Perfree
+     * 插件更新时加载
+     * @author perfree
+     * @date 2023-09-27 16:09:05
      */
     void onUpdate();
+
     /**
-     * @description 插件安装时加载
-     * @author Perfree
+     * 插件安装时加载
+     * @author perfree
+     * @date 2023-09-27 16:09:05
      */
     void onInstall();
+
     /**
-     * @description 插件卸载时加载
-     * @author Perfree
+     * 插件卸载时调用
+     * @author perfree
+     * @date 2023-09-27 16:09:05
      */
     void onUnInstall();
 }
